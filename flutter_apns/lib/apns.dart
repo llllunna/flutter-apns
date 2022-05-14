@@ -9,10 +9,10 @@ export 'package:flutter_apns/src/apns_connector.dart';
 export 'package:flutter_apns/src/firebase_connector.dart';
 
 /// Creates either APNS or Firebase connector to manage the push notification registration.
-PushConnector createPushConnector() {
+PushConnector createPushConnector({String? vapidKey}) {
   if (Platform.isIOS) {
     return ApnsPushConnector();
   } else {
-    return FirebasePushConnector();
+    return FirebasePushConnector(vapidKey: vapidKey);
   }
 }

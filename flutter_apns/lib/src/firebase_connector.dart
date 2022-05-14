@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class FirebasePushConnector extends PushConnector {
+  FirebasePushConnector({this.vapidKey});
   late final firebase = FirebaseMessaging.instance;
+  String? vapidKey;
 
   @override
   final isDisabledByUser = ValueNotifier<bool?>(null);
@@ -42,7 +44,7 @@ class FirebasePushConnector extends PushConnector {
       onLaunch?.call(initial);
     }
 
-    token.value = await firebase.getToken();
+    token.value = await firebase.getToken(vapidKey: vapidKey);
   }
 
   @override
